@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>AJAX发送post请求</h1>
+<input type="text" placeholder="请输入内容" id="content">
+<span id="tip"></span>
+<br>
+<button onclick="ajax_post()">发送AJAX请求</button>
+
+<!-- <form action="/ajax/post/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="content">
+    <input type="submit">
+</form> -->
+<script>
+    function ajax_post(){
+        //创建异步对象
+        var xhr= new XMLHttpRequest();
+        var content=document.getElementById('content');
+        // console.log(xhr);
+        // 创建请求
+        // post方式传递数据  将数据通过查询字符串的方式拼接在地址中发送给服务器
+        xhr.open('post','http://127.0.0.1:8000/ajax/post/',true); 
+        xhr.onreadystatechange=function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            // console.log(xhr.status);
+            console.log(xhr.responseText);
+            }
+            else{
+                console.log('服务器正忙,请稍后')
+            }
+        }
+        xhr.send(`content=${content.value}`)
+</script>
+
+</body>
+</html>

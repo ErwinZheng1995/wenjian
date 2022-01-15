@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>
+    AJAX发送get请求
+</h1>
+<input type="text" placeholder="请输入内容" id="content">
+<span id="tip"></span>
+<br>
+<button id="btn">发送AJAX请求</button>
+<script>
+    var btn =document.getElementById('btn');
+    var content=document.getElementById('content');
+    var tip=document.getElementById('tip');
+
+    btn.onclick=ajax_get;
+    function ajax_get(){
+        //创建异步对象
+    var xhr= new XMLHttpRequest();
+    // console.log(xhr);
+    // 创建请求
+    // get方式传递数据  将数据通过查询字符串的方式拼接在地址中发送给服务器
+    xhr.open('get','http://127.0.0.1:8000/ajax/get?content='+content.value,true);
+
+    // 发送请求
+    xhr.send();
+
+    // 当请求和相应的流程结术后  接受响应
+    xhr.onreadystatechange=function(){
+        if(xhr.readyState==4){
+            // console.log(xhr.responseText);
+            tip.innerHTML=xhr.responseText;
+            tip.style='color:red';
+        }
+    }
+    }
+
+</script>
+
+</body>
+</html>
